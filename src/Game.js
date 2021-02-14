@@ -50,11 +50,16 @@ export default class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       let desc = '';
+      let styles = {};
 
       if (move) {
         const col = step.i % 3 + 1;
         const row = Math.floor((step.i) / 3) + 1;
         desc = `Go to move #${move} (${col}, ${row})`;
+
+      if (move == this.state.stepNumber) {
+        styles = {'fontWeight':'bold'}
+      }
 
       } else {
         desc = 'Go to game start';
@@ -62,7 +67,7 @@ export default class Game extends React.Component {
 
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button style={styles} onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });

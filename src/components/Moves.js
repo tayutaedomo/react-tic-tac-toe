@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default (props) => {
-  const moves = props.history.map((step, move) => {
+  let moves = props.history.map((step, move) => {
     let desc = '';
     let styles = {};
 
@@ -24,6 +24,10 @@ export default (props) => {
       </li>
     );
   });
+
+  if (!props.order) {
+    moves = moves.reverse();
+  }
 
   return (
     <ol>{moves}</ol>

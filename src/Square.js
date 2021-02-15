@@ -1,8 +1,18 @@
 import React from 'react';
 
 export default (props) => {
+  let styles = {};
+
+  if (props.highlight) {
+    styles = {backgroundColor: 'lime'};
+  }
+
   return (
-    <button className="square" onClick={props.onClick}>
+    <button
+      style={styles}
+      className='square'
+      onClick={props.onClick}
+    >
       {props.value}
     </button>
   );

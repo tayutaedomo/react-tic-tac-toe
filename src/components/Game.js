@@ -1,6 +1,6 @@
 import React from 'react';
-import Board from './components/Board';
-import Moves from './components/Moves';
+import Board from './Board';
+import Moves from './Moves';
 
 
 export default class Game extends React.Component {

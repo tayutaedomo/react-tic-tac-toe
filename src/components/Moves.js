@@ -1,35 +1,52 @@
 import React from 'react';
 
-export default (props) => {
-  let moves = props.history.map((step, move) => {
-    let desc = '';
-    let styles = {};
+export default class Moves extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      order: true,
+    };
+  }
 
-    if (move) {
-      const col = step.i % 3 + 1;
-      const row = Math.floor((step.i) / 3) + 1;
-      desc = `Go to move #${move} (${col}, ${row})`;
+  toggleOrder() { this.setState({
+      order: !this.state.order,
+    })
+  }
 
-    if (move == props.stepNumber) {
-      styles = {'fontWeight':'bold'}
-    }
+  render() {
+    let moves = this.props.history.map((step, move) => {
+      let desc = '';
+      let styles = {};
 
-    } else {
-      desc = 'Go to game start';
+      if (move) {
+        const col = step.i % 3 + 1;
+        const row = Math.floor((step.i) / 3) + 1;
+        desc = `Go to move #${move} (${col}, ${row})`;
+
+      if (move == this.props.stepNumber) {
+        styles = {'fontWeight':'bold'}
+      }
+
+      } else {
+        desc = 'Go to game start';
+      }
+
+      return (
+        <li key={move}>
+          <button style={styles} onClick={() => this.props.jumpTo(move)}>{desc}</button>
+        </li>
+      );
+    });
+
+    if (!this.state.order) {
+      moves = moves.reverse();
     }
 
     return (
-      <li key={move}>
-        <button style={styles} onClick={() => props.jumpTo(move)}>{desc}</button>
-      </li>
+      <div>
+        <ol>{moves}</ol>
+        <button onClick={() => this.toggleOrder()}>Toggle</button>
+      </div>
     );
-  });
-
-  if (!props.order) {
-    moves = moves.reverse();
   }
-
-  return (
-    <ol>{moves}</ol>
-  );
 }

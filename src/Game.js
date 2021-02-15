@@ -13,7 +13,6 @@ export default class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
-      movesOrder: true,
     }
   }
 
@@ -45,12 +44,6 @@ export default class Game extends React.Component {
     })
   }
 
-  toggleMovesOrder() {
-    this.setState({
-      movesOrder: !this.state.movesOrder,
-    })
-  }
-
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -77,11 +70,7 @@ export default class Game extends React.Component {
             history={history}
             stepNumber={this.state.stepNumber}
             jumpTo={(step) => this.jumpTo(step)}
-            order={this.state.movesOrder}
           />
-          <div>
-            <button onClick={() => this.toggleMovesOrder()}>Toggle</button>
-          </div>
         </div>
       </div>
     );
